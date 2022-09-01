@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe ( 'map requests' ) {
+describe('map requests') do
   subject { page }
 
-  describe 'get /map', :js => true do
+  describe 'get /map', js: true do
     before { visit map_path }
     it {
       should have_title 'Map | Internet Monitor'
@@ -15,17 +15,17 @@ describe ( 'map requests' ) {
       should have_css '.geomap'
     }
 
-    it ( 'should initialize a map' ) {
+    it('should initialize a map') {
       should have_css '.geomap.geo-map'
     }
 
-    it ( 'should not have a default basemap' ) {
+    it('should not have a default basemap') {
       should have_css '#map-countries-service.geo-service'
       should have_css '#map-highlight-service.geo-service'
     }
 
-    it ( 'should include jQuery Geo' ) {
+    it('should include jQuery Geo') {
       should have_css 'script[src*="jquery.geo"]', visible: false
     }
   end
-}
+end

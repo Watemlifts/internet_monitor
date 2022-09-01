@@ -1,4 +1,3 @@
-# encoding: utf-8
 Refinery::Pages.configure do |config|
   # Configure specific page templates
   # config.types.register :home do |home|
@@ -34,9 +33,9 @@ Refinery::Pages.configure do |config|
   # when you create a page
   config.use_custom_slugs = true
 
-  config.add_whitelist_elements = %w( iframe )
-  config.add_whitelist_attributes = %w( frameborder scrolling data-row data-col )
-  
+  config.add_whitelist_elements = %w[iframe]
+  config.add_whitelist_attributes = %w[frameborder scrolling data-row data-col]
+
   # Set this to true if you want backend pages to be cached
   # config.cache_pages_backend = false
 
@@ -46,7 +45,7 @@ Refinery::Pages.configure do |config|
   # Set this to true to fully expand the page hierarchy in the admin
   # config.auto_expand_admin_tree = true
 
-  config.layout_template_whitelist = ['application', 'bulletin', 'report', 'report_country', 'embed']
+  config.layout_template_whitelist = %w[application bulletin report report_country embed]
 
   # config.view_template_whitelist = ['home', 'show']
 

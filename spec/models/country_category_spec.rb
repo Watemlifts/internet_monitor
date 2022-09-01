@@ -1,17 +1,18 @@
 require 'spec_helper'
 
-describe ( 'CountryCategory model' ) {
-  let ( :country ) { Country.find_by_iso3_code( 'IRN' ) }
-  let ( :country_category ) { CountryCategory.where( { country_id: country.id, category_id: Category.find_by_slug( 'access' ) } ).first }
+describe('CountryCategory model') do
+  let(:country) { Country.find_by_iso3_code('IRN') }
+  let(:country_category) do
+    CountryCategory.where({ country_id: country.id, category_id: Category.find_by_slug('access') }).first
+  end
 
   subject { country_category }
 
-  context ( 'with valid data' ) {
+  context('with valid data') do
     it { should be_valid }
 
     it { should respond_to :indicators }
 
     it { should_not respond_to :score }
-  }
-}
-
+  end
+end

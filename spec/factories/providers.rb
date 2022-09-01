@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :provider do
-    name "MyString"
-    short_name "MyString"
-    url "MyString"
+    name 'MyString'
+    short_name 'MyString'
+    url 'MyString'
   end
 end

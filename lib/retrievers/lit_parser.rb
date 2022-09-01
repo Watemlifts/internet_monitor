@@ -10,10 +10,10 @@ class LitParser
       country = Country.find_by_name row['Country']
       next unless country
 
-      i = Indicator.new( {
-        start_date: Date.new(2014, 6, 12),
-        original_value: row[ 'Literacy rate' ].to_f * multiplier
-      } )
+      i = Indicator.new({
+                          start_date: Date.new(2014, 6, 12),
+                          original_value: row['Literacy rate'].to_f * multiplier
+                        })
       i.country = country
       data << i
     end

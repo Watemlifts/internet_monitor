@@ -1,5 +1,5 @@
 module CountryCategoriesHelper
-  def indicators_partial( group )
+  def indicators_partial(group)
     # return the correct partial to render for a given indicator group
     if group.admin_name == 'filtering'
       'data/indicators_filtering'

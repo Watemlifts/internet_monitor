@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe ( 'shared/widgets/_weight_sliders' ) {
+describe('shared/widgets/_weight_sliders') do
   subject { rendered }
 
-  context ( 'normal indicator' ) {
-    let ( :access ) { Category.find_by_slug 'access' }
-    let ( :groups ) {  DatumSource.where( { category_id: access.id } ).map { |ds| ds.group }.uniq }
-    let ( :adoption ) { groups.first }
+  context('normal indicator') do
+    let(:access) { Category.find_by_slug 'access' }
+    let(:groups) { DatumSource.where({ category_id: access.id }).map { |ds| ds.group }.uniq }
+    let(:adoption) { groups.first }
 
-    before {
+    before do
       render 'shared/widgets/weight_sliders', groups: groups, background_color: '#ff0000'
-    }
+    end
 
     it {
       should have_css 'form#weight-sliders'
@@ -55,11 +55,11 @@ describe ( 'shared/widgets/_weight_sliders' ) {
     }
 
     it {
-      should have_css "input[data-background-min][data-background-max]"
+      should have_css 'input[data-background-min][data-background-max]'
     }
 
-    it { 
+    it {
       should have_css 'button[type="reset"]'
     }
-  }
-}
+  end
+end

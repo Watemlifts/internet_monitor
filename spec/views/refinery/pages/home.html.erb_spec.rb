@@ -1,30 +1,30 @@
 require 'spec_helper'
 
-describe ( 'refinery/pages/home' ) {
-  let ( :country ) { Country.find_by_iso3_code( 'IRN' ) }
+describe('refinery/pages/home') do
+  let(:country) { Country.find_by_iso3_code('IRN') }
 
   subject { rendered }
 
-  context ( 'default view' ) {
-    before {
-      assign( :map_countries, Country.with_enough_data.where( { id: country.id } ).select( 'iso3_code,score' ) )
+  context('default view') do
+    before do
+      assign(:map_countries, Country.with_enough_data.where({ id: country.id }).select('iso3_code,score'))
       render
-    }
+    end
 
     it {
       should_not have_css '.category-selector'
     }
 
-    it ( 'should have tagline' ) {
+    it('should have tagline') {
       # now in header image
       should_not have_css 'p.tagline', text: 'Analyzing'
     }
 
-    describe ( 'carousel' ) {
+    describe('carousel') do
       it {
         should have_css 'div.carousel'
       }
-      
+
       it {
         should have_css 'div.carousel > div a[href*="/about"]'
       }
@@ -32,7 +32,7 @@ describe ( 'refinery/pages/home' ) {
       it {
         should have_css 'div.carousel > div a[href*="/map"]'
       }
-    }
+    end
 
     it {
       should have_css 'h2', text: 'We monitor and report on...'
@@ -72,16 +72,16 @@ describe ( 'refinery/pages/home' ) {
       should have_css '.twitter span', text: 'on Twitter'
     }
 
-    describe ( 'trending' ) {
+    describe('trending') do
       it {
         should have_css '.trending h2', text: 'Featured Countries'
       }
 
-      it { 
+      it {
         should have_css ".trending li a[data-country-id='#{country.id}']"
       }
 
-      it ( 'should no longer have score pills' ) { 
+      it('should no longer have score pills') {
         # score pills removed from home
         should_not have_css '.trending li .score-pill'
         should_not have_css ".trending .score-pill[data-country-id='#{country.id}']"
@@ -92,25 +92,25 @@ describe ( 'refinery/pages/home' ) {
         should_not have_css '.trending li .score-pill .user-rank'
       }
 
-      it ( 'should no longer have map data at top level' ) {
+      it('should no longer have map data at top level') {
         should_not have_css '.trending[data-map-countries]'
         should_not have_css '.trending[data-min-score]'
         should_not have_css '.trending[data-max-score]'
       }
 
-      it ( 'should map of country' ) {
+      it('should map of country') {
         should have_css '.trending li a .static-map'
         should_not have_css '.trending li a .static-map[data-country-iso3="IRN"]'
       }
 
-      it ( 'should have png thumb of country' ) {
+      it('should have png thumb of country') {
         should have_css '.trending li a .static-map img'
         should have_css ".trending li a .static-map img[src*='#{thumb_country_path country}']"
       }
 
-      it ( 'map should show country name' ) {
+      it('map should show country name') {
         should have_css '.trending li a .static-map span', text: country.name
       }
-    }
-  }
-}
+    end
+  end
+end

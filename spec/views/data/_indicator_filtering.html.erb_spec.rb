@@ -1,20 +1,20 @@
 require 'spec_helper'
 
-describe ( 'data/_indicator_filtering' ) {
-  let ( :country ) { Country.find_by_iso3_code( 'IRN' ) }
+describe('data/_indicator_filtering') do
+  let(:country) { Country.find_by_iso3_code('IRN') }
 
   subject { rendered }
 
-  shared_examples_for ( 'indicator_filtering' ) {
+  shared_examples_for('indicator_filtering') do
     it {
       should have_css 'dt', text: indicator.name
     }
 
     it {
-      should have_css "dt a[title='Source: #{ ds.source_name }']"
+      should have_css "dt a[title='Source: #{ds.source_name}']"
     }
 
-    it ( 'should link to the sources cms page' ) {
+    it('should link to the sources cms page') {
       should have_css 'dt a[href*="/sources"]'
     }
 
@@ -35,7 +35,7 @@ describe ( 'data/_indicator_filtering' ) {
       should have_css 'span.indicator-bar-inner'
     }
 
-    it ( 'inner width' ) {
+    it('inner width') {
       should have_css 'span.indicator-bar-inner[style*="100"]'
     }
 
@@ -43,23 +43,22 @@ describe ( 'data/_indicator_filtering' ) {
       # filtering indicators don't show value
       should_not have_css 'span.original-value'
     }
-  }
+  end
 
-  context ( 'filtering group indicators' ) {
-    let ( :category ) { Category.find_by_slug( 'control' ) }
+  context('filtering group indicators') do
+    let(:category) { Category.find_by_slug('control') }
 
-    context ( 'social' ) {
+    context('social') do
       # social is of group filtering
-      let ( :ds ) { DatumSource.find_by_admin_name( 'ds_social' ) }
-      let ( :indicator ) { country.indicators.where( { datum_source_id: ds.id } ).first }
+      let(:ds) { DatumSource.find_by_admin_name('ds_social') }
+      let(:indicator) { country.indicators.where({ datum_source_id: ds.id }).first }
 
-      before {
-        assign( :category, category )
+      before do
+        assign(:category, category)
         render 'data/indicator_filtering', indicator_filtering: indicator
-      }
-      
-      it_should_behave_like 'indicator_filtering'
-    }
-  }
-}
+      end
 
+      it_should_behave_like 'indicator_filtering'
+    end
+  end
+end

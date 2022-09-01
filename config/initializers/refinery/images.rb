@@ -1,4 +1,3 @@
-# encoding: utf-8
 Refinery::Images.configure do |config|
   # Configures the maximum allowed upload size (in bytes) for an image
   # config.max_image_size = 5242880
@@ -42,5 +41,4 @@ Refinery::Images.configure do |config|
   # config.datastore_root_path = "K:/internet_monitor/public/system/refinery/images"
   # config.trust_file_extensions = false
   config.dragonfly_verify_urls = false
-
 end

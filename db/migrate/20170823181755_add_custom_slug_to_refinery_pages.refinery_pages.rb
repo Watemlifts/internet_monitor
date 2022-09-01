@@ -1,18 +1,15 @@
 # This migration comes from refinery_pages (originally 20140105190324)
 class AddCustomSlugToRefineryPages < ActiveRecord::Migration
   def up
-    if page_column_names.exclude?('custom_slug')
-      add_column :refinery_pages, :custom_slug, :string
-    end
+    add_column :refinery_pages, :custom_slug, :string if page_column_names.exclude?('custom_slug')
   end
 
   def down
-    if page_column_names.include?('custom_slug')
-      remove_column :refinery_pages, :custom_slug
-    end
+    remove_column :refinery_pages, :custom_slug if page_column_names.include?('custom_slug')
   end
 
   private
+
   def page_column_names
     return [] unless defined?(::Refinery::Page)
 

@@ -1,20 +1,17 @@
 require 'open-uri'
 
 class DatumSourcesController < ApplicationController
-  http_basic_authenticate_with name: Rails.application.config.imon[ 'ds_user' ], password: Rails.application.config.imon[ 'ds_passwd' ]
+  http_basic_authenticate_with name: Rails.application.config.imon['ds_user'],
+                               password: Rails.application.config.imon['ds_passwd']
 
-  before_filter :set_datum_source, only: [:show, :edit, :update, :destroy]
+  before_filter :set_datum_source, only: %i[show edit update destroy]
 
   def index
-    @datum_sources = DatumSource.order( :admin_name )
-    
-    if params[:affects_score]
-      @datum_sources = @datum_sources.where affects_score: true
-    end
-      
-    if params[:type]
-      @datum_sources = @datum_sources.where datum_type: params[:type]
-    end    
+    @datum_sources = DatumSource.order(:admin_name)
+
+    @datum_sources = @datum_sources.where affects_score: true if params[:affects_score]
+
+    @datum_sources = @datum_sources.where datum_type: params[:type] if params[:type]
   end
 
   # GET /datum_sources/1
@@ -22,12 +19,12 @@ class DatumSourcesController < ApplicationController
     if @datum_source.is_api?
       respond_to do |format|
         endpoint = open @datum_source.api_endpoint
-        format.xml {
+        format.xml do
           render xml: endpoint.read
-        }
-        format.json {
+        end
+        format.json do
           render json: endpoint.read
-        }
+        end
       end
     else
       not_found
@@ -38,10 +35,9 @@ class DatumSourcesController < ApplicationController
   def new
     @datum_source = DatumSource.new
   end
-  
+
   # GET /datum_sources/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /datum_sources
   def create

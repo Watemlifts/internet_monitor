@@ -12,10 +12,10 @@ class SecEdParser
       next unless country
       next if row[column] == '..'
 
-      i = Indicator.new( {
-        start_date: Date.new(2010, 1, 1),
-        original_value: row[ column ].to_f
-      } )
+      i = Indicator.new({
+                          start_date: Date.new(2010, 1, 1),
+                          original_value: row[column].to_f
+                        })
       i.country = country
       data << i
     end

@@ -1,10 +1,8 @@
-require File.expand_path('../boot', __FILE__)
+require File.expand_path('boot', __dir__)
 
 require 'rails/all'
 
-if defined?(Bundler)
-  Bundler.require(*Rails.groups)
-end
+Bundler.require(*Rails.groups) if defined?(Bundler)
 
 module Imon
   class Application < Rails::Application
@@ -14,7 +12,7 @@ module Imon
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
-    config.autoload_paths += %W(#{Rails.root.join('lib', 'retrievers')})
+    config.autoload_paths += %W[#{Rails.root.join('lib', 'retrievers')}]
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -32,7 +30,7 @@ module Imon
     # config.i18n.default_locale = :de
 
     # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
+    config.encoding = 'utf-8'
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
