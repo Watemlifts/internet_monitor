@@ -84,7 +84,7 @@ $( function () {
         map.geomap( 'option', 'bbox', bboxen[ feature.id ] );
         setTimeout( storeImage, 2000 );
       } else {
-        console.log( 'missing country for ' + feature.id );
+        
         cacheIdx++;
         $( 'progress' ).prop( 'value', cacheIdx );
 
@@ -117,7 +117,7 @@ $( function () {
           } );
         }
       } else {
-        console.log( 'cannot create dataURL for ' + feature.id );
+        
       }
 
       mapCountriesService.geomap('remove', feature);
