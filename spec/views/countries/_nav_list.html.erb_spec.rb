@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe ( 'countries/_nav_list' ) {
-  let ( :country ) { Country.find_by_iso3_code( 'IRN' ) }
+describe('countries/_nav_list') do
+  let(:country) { Country.find_by_iso3_code('IRN') }
 
   subject { rendered }
 
-  before {
+  before do
     render
-  }
+  end
 
   it {
     should have_css '.countries-nav-list'
@@ -20,4 +20,4 @@ describe ( 'countries/_nav_list' ) {
   it {
     should have_css "a[href*='#{category_country_path country, category_slug: 'access'}']"
   }
-}
+end

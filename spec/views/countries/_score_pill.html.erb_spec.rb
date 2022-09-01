@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe ( 'countries/_score_pill' ) {
+describe('countries/_score_pill') do
   subject { rendered }
 
-  context ( 'normal country' ) {
-    let ( :country ) { Country.find_by_iso3_code( 'IRN' ) }
+  context('normal country') do
+    let(:country) { Country.find_by_iso3_code('IRN') }
 
-    context ( 'normal display' ) {
-      before {
-        assign( :country, country )
+    context('normal display') do
+      before do
+        assign(:country, country)
         render 'countries/score_pill', country: country
-      }
+      end
 
       it {
         should have_css '.score-pill'
@@ -18,7 +18,8 @@ describe ( 'countries/_score_pill' ) {
       }
 
       it {
-        should have_css "a[href*='#{category_country_path country, category_slug: 'access'}'].country-name", text: country.name
+        should have_css "a[href*='#{category_country_path country, category_slug: 'access'}'].country-name",
+                        text: country.name
         should have_css "a[title='#{country.name}']"
       }
 
@@ -31,7 +32,7 @@ describe ( 'countries/_score_pill' ) {
       }
 
       it {
-        should have_css 'span.imon-score', text: number_with_precision( country.score, { precision: 2 } ), exact: true
+        should have_css 'span.imon-score', text: number_with_precision(country.score, { precision: 2 }), exact: true
       }
 
       it {
@@ -45,12 +46,12 @@ describe ( 'countries/_score_pill' ) {
       it {
         should have_css 'span.help', text: '?'
       }
-    }
+    end
 
-    context ( 'trending display' ) {
-      before {
+    context('trending display') do
+      before do
         render 'countries/score_pill', country: country, show_user: false
-      }
+      end
 
       it {
         should have_css '.score-pill'
@@ -67,6 +68,6 @@ describe ( 'countries/_score_pill' ) {
       it {
         should_not have_css 'a.user-rank'
       }
-    }
-  }
-}
+    end
+  end
+end

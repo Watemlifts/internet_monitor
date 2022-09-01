@@ -9,7 +9,7 @@ require 'csv'
 require 'roo'
 
 # Create countries and connect to languages
-CSV.open(Rails.root.join('db', 'countryInfo.txt'), {:headers => true, :col_sep => "\t"}).each do |line|
+CSV.open(Rails.root.join('db', 'countryInfo.txt'), { headers: true, col_sep: "\t" }).each do |line|
   country = Country.create iso_code: line['ISO'], name: line['Country'], iso3_code: line['ISO3']
 end
 

@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe ( 'shared/widgets/_category_selector' ) {
+describe('shared/widgets/_category_selector') do
   subject { rendered }
 
-  context ( 'no country' ) {
-    before {
+  context('no country') do
+    before do
       render
-    }
+    end
 
     it {
       should have_css '.category-selector'
@@ -27,15 +27,15 @@ describe ( 'shared/widgets/_category_selector' ) {
     it {
       should have_css 'li:last a', text: 'Activity'
     }
-  }
+  end
 
-  context ( 'country' ) {
-    let ( :country ) { Country.find_by_iso3_code( 'IRN' ) }
+  context('country') do
+    let(:country) { Country.find_by_iso3_code('IRN') }
 
-    before {
-      assign( :country, country )
+    before do
+      assign(:country, country)
       render
-    }
+    end
 
     it {
       should have_css '.category-selector'
@@ -56,5 +56,5 @@ describe ( 'shared/widgets/_category_selector' ) {
     it {
       should have_css 'li:last a', text: 'Activity'
     }
-  }
-}
+  end
+end

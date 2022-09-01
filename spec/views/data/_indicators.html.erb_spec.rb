@@ -1,23 +1,23 @@
 require 'spec_helper'
 
-describe ( 'data/_indicators' ) {
-  let ( :country ) { Country.find_by_iso3_code( 'IRN' ) }
+describe('data/_indicators') do
+  let(:country) { Country.find_by_iso3_code('IRN') }
 
   subject { rendered }
 
-  context ( 'access indicators' ) {
-    let ( :category ) { Category.find_by_slug( 'access' ) }
-    let ( :grouped ) {
-      category.data.indicators.in_category_page.most_recent.for( country ).group_by { |i|
+  context('access indicators') do
+    let(:category) { Category.find_by_slug('access') }
+    let(:grouped) do
+      category.data.indicators.in_category_page.most_recent.for(country).group_by do |i|
         i.source.group
-      }
-    }
-    let ( :group ) { grouped.first }
+      end
+    end
+    let(:group) { grouped.first }
 
-    before {
-      assign( :category, category )
-      render 'data/indicators', indicators: group[ 1 ], group: group[ 0 ]
-    }
+    before do
+      assign(:category, category)
+      render 'data/indicators', indicators: group[1], group: group[0]
+    end
 
     it {
       should have_css "div.indicators.indicators-#{group[0].admin_name}"
@@ -34,6 +34,5 @@ describe ( 'data/_indicators' ) {
     it {
       should have_css '.indicators-label span', text: 'worst'
     }
-  }
-}
-
+  end
+end

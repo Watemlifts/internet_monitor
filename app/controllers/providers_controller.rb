@@ -47,7 +47,7 @@ class ProvidersController < ApplicationController
         format.html { redirect_to @provider, notice: 'Provider was successfully created.' }
         format.json { render json: @provider, status: :created, location: @provider }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @provider.errors, status: :unprocessable_entity }
       end
     end
@@ -63,7 +63,7 @@ class ProvidersController < ApplicationController
         format.html { redirect_to @provider, notice: 'Provider was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @provider.errors, status: :unprocessable_entity }
       end
     end

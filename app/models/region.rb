@@ -1,7 +1,7 @@
 class Region < Country
   self.table_name = 'countries'
 
-  default_scope { where(:region => true) }
+  default_scope { where(region: true) }
 
   scope :with_enough_data, -> { where('indicator_count > 0') }
   scope :without_enough_data, -> { where('indicator_count = 0') }
@@ -26,12 +26,12 @@ class Region < Country
       },
       relationships: {
         indicators: {
-          data: indicators.in_current_index.map { |i|
+          data: indicators.in_current_index.map do |i|
             {
               type: 'indicators',
               id: i.id.to_s
             }
-          }
+          end
         }
       }
     }
