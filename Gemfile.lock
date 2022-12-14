@@ -85,6 +85,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    crass (1.0.6)
     decorators (2.0.3)
       railties (>= 4.0.0, < 5.2)
     devise (3.5.10)
@@ -152,7 +153,8 @@ GEM
     libv8 (3.16.14.19)
     lightbox2-rails (2.8.2.1)
       railties (>= 3.1)
-    loofah (2.0.3)
+    loofah (2.19.1)
+      crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.6)
       mime-types (>= 1.16, < 4)
