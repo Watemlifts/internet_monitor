@@ -1,29 +1,29 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe ( 'layouts/application' ) {
+describe("layouts/application") {
   subject { rendered }
 
-  context ( 'default layout' ) {
-    let ( :groups  ) { Group.all }
+  context("default layout") {
+    let(:groups) { Group.all }
 
     before {
-      assign( :groups, groups )
-      render 
+      assign(:groups, groups)
+      render
     }
 
-    it ( 'should have header links' ) {
-      should have_css 'header nav'
+    it("should have header links") {
+      should have_css "header nav"
 
-      should have_css "header a[href*='#{refinery::marketable_page_path('about')}']"
-      should have_css "header a[href*='#{refinery::marketable_page_path('research')}']"
-      should have_css "header a[href*='#{refinery::marketable_page_path('sources')}']"
-      should have_css "header a[href*='#{refinery::marketable_page_path('faq')}']"
-      should have_css "header a[href$='#{refinery::blog_root_path}']"
+      should have_css "header a[href*='#{refinery.marketable_page_path("about")}']"
+      should have_css "header a[href*='#{refinery.marketable_page_path("research")}']"
+      should have_css "header a[href*='#{refinery.marketable_page_path("sources")}']"
+      should have_css "header a[href*='#{refinery.marketable_page_path("faq")}']"
+      should have_css "header a[href$='#{refinery.blog_root_path}']"
     }
 
-    it ( 'should have countries dropdown' ) {
+    it("should have countries dropdown") {
       should_not have_css "header a[href*='#{countries_path}']"
-      should have_css 'header a.data-nav-countries', text: 'countries'
+      should have_css "header a.data-nav-countries", text: "countries"
     }
 
     it {
@@ -31,32 +31,32 @@ describe ( 'layouts/application' ) {
     }
 
     it {
-      should have_css '.data-nav-countries'
-      should have_css '.countries-nav-list'
-      should_not have_css '.countries-nav-list.expanded'
+      should have_css ".data-nav-countries"
+      should have_css ".countries-nav-list"
+      should_not have_css ".countries-nav-list.expanded"
     }
 
     it {
       # categories now always visible, don't need a toggle
-      should_not have_css '.data-nav-categories'
+      should_not have_css ".data-nav-categories"
     }
 
-    it ( 'should no longer have country data loading screen (dev env, only)' ) {
-      should_not have_css '.score-keeper-loader', visible: false
+    it("should no longer have country data loading screen (dev env, only)") {
+      should_not have_css ".score-keeper-loader", visible: false
     }
 
-    it ( 'should have footer links' ) {
-      should have_css( 'footer nav' );
+    it("should have footer links") {
+      should have_css("footer nav")
 
-      should have_css "footer a[href*='#{refinery::marketable_page_path('about')}']"
-      should have_css "footer a[href*='#{refinery::marketable_page_path('terms-of-service')}']", text: 'terms & privacy'
-      should have_css "footer a[href*='#{refinery::marketable_page_path('contact')}']", text: 'contact'
-      should have_css "footer a[href$='#{refinery::blog_root_path}']"
-      should_not have_css 'footer li', text: 'MAILING LIST'
+      should have_css "footer a[href*='#{refinery.marketable_page_path("about")}']"
+      should have_css "footer a[href*='#{refinery.marketable_page_path("terms-of-service")}']", text: "terms & privacy"
+      should have_css "footer a[href*='#{refinery.marketable_page_path("contact")}']", text: "contact"
+      should have_css "footer a[href$='#{refinery.blog_root_path}']"
+      should_not have_css "footer li", text: "MAILING LIST"
     }
 
-    it ( 'should have cc link' ) {
-      should have_css "footer span.cc a[href='http://creativecommons.org/licenses/by/3.0/']", text: 'Creative Commons'
+    it("should have cc link") {
+      should have_css "footer span.cc a[href='http://creativecommons.org/licenses/by/3.0/']", text: "Creative Commons"
     }
   }
 }

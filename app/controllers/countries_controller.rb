@@ -1,41 +1,40 @@
 class CountriesController < ApplicationController
   def index
-    redirect_to '/country-profiles'
+    redirect_to "/country-profiles"
   end
 
   def cache_thumbs
-    @map_countries = Country.select( 'id,iso3_code' ) 
+    @map_countries = Country.select("id,iso3_code")
     @map_countries_count = Country.count
     render
   end
 
   def update
-    if params[ :country ][ :thumb ].present?
+    if params[:country][:thumb].present?
       id = params[:id]
       @country = Country.find(id)
 
-      File.open( Rails.root.join( 'app', 'assets', 'images', 'countries', "#{@country.iso3_code}.png" ), 'wb') do |f|
-        f.write(params[:country][:thumb].read)
-      end
+      File.binwrite(Rails.root.join("app", "assets", "images", "countries", "#{@country.iso3_code}.png"),
+                    params[:country][:thumb].read)
 
-      render text: 'ok'
+      render text: "ok"
     else
-      render text: 'error'
+      render text: "error"
     end
   end
 
   def show
-    @country = Country.find(params[:id]) if Country.exists?( params[:id] )
+    @country = Country.find(params[:id]) if Country.exists?(params[:id])
 
     slug = @country.iso3_code.downcase unless @country.nil?
 
     page = Refinery::Page.find_by_slug slug
-    cp_page = Refinery::Page.find_by_slug( 'country-profiles' )
+    cp_page = Refinery::Page.find_by_slug("country-profiles")
 
     if page.present?
-      redirect_to "/#{page.url[ :path ].join( '/' )}"
+      redirect_to "/#{page.url[:path].join("/")}"
     elsif cp_page.present?
-      redirect_to "/#{cp_page.url[ :path ].join( '/' )}"
+      redirect_to "/#{cp_page.url[:path].join("/")}"
     else
       redirect_to refinery_path
     end
@@ -43,7 +42,7 @@ class CountriesController < ApplicationController
 
   def thumb
     @country = Country.find(params[:id])
-    send_data File.open( Rails.root.join( 'app', 'assets', 'images', 'countries', "#{@country.iso3_code}.png" ), 'rb' ).read, type: 'image/png', disposition: 'inline'
+    send_data File.binread(Rails.root.join("app", "assets", "images", "countries", "#{@country.iso3_code}.png")),
+              type: "image/png", disposition: "inline"
   end
-  
 end

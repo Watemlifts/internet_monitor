@@ -1,11 +1,11 @@
 class Region < Country
-  self.table_name = 'countries'
+  self.table_name = "countries"
 
-  default_scope { where(:region => true) }
+  default_scope { where(region: true) }
 
-  scope :with_enough_data, -> { where('indicator_count > 0') }
-  scope :without_enough_data, -> { where('indicator_count = 0') }
-  scope :desc_score, -> { order('score DESC') }
+  scope :with_enough_data, -> { where("indicator_count > 0") }
+  scope :without_enough_data, -> { where("indicator_count = 0") }
+  scope :desc_score, -> { order("score DESC") }
 
   def enough_data?
     indicator_count > 0
@@ -13,7 +13,7 @@ class Region < Country
 
   def as_jsonapi
     {
-      type: 'regions',
+      type: "regions",
       id: id.to_s,
       attributes: {
         name: name,
@@ -22,13 +22,13 @@ class Region < Country
         rank: rank
       },
       links: {
-        self: ''
+        self: ""
       },
       relationships: {
         indicators: {
           data: indicators.in_current_index.map { |i|
             {
-              type: 'indicators',
+              type: "indicators",
               id: i.id.to_s
             }
           }

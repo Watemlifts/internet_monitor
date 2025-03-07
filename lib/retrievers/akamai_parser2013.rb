@@ -1,48 +1,47 @@
 class AkamaiParser2013
-    require 'roo'
-    require 'csv'
-    QUARTER_MAP = {
-        'Q1' => [1, 1],
-        'Q2' => [4, 1],
-        'Q3' => [7, 1],
-        'Q4' => [10, 1]
-    }
+  require "roo"
+  require "csv"
+  QUARTER_MAP = {
+    "Q1" => [1, 1],
+    "Q2" => [4, 1],
+    "Q3" => [7, 1],
+    "Q4" => [10, 1]
+  }
 
-    # all floats
-    # map country name to country code
-    # convert "Q\d \d\d\d\d" to latest date
-    
-    def data(options = {})
-        sheetname = options[:sheetname]
-        column = options[:column]
-        filename = options[:filename]
+  # all floats
+  # map country name to country code
+  # convert "Q\d \d\d\d\d" to latest date
 
-        data = []
+  def data(options = {})
+    sheetname = options[:sheetname]
+    column = options[:column]
+    filename = options[:filename]
 
-        spreadsheet = Roo::Spreadsheet.open(filename)
+    data = []
 
-        csv = CSV.parse(spreadsheet.sheet(sheetname).to_csv, { :headers => true })
+    spreadsheet = Roo::Spreadsheet.open(filename)
 
-        csv.each do |row|
-            country = Country.find_by_name(row['Region'])
-            next unless country
+    csv = CSV.parse(spreadsheet.sheet(sheetname).to_csv, { headers: true })
 
-            # Get all quarterly cells
-            #row.select{|h,v| h.match(/Q\d \d{4}/)}.each do |header, value|
-            quarter, year = *sheetname.split(' ')
-            start_date = Date.new(year.to_i, QUARTER_MAP[quarter][0], QUARTER_MAP[quarter][1])
+    csv.each do |row|
+      country = Country.find_by_name(row["Region"])
+      next unless country
 
-            value = row[ column ].to_f
-            if options[ :multiplier ].present?
-              value *= options[ :multiplier ]
-            end
+      # Get all quarterly cells
+      # row.select{|h,v| h.match(/Q\d \d{4}/)}.each do |header, value|
+      quarter, year = *sheetname.split(" ")
+      start_date = Date.new(year.to_i, QUARTER_MAP[quarter][0], QUARTER_MAP[quarter][1])
 
-            i = Indicator.new( :start_date => start_date, :original_value => value )
-            i.country = country
-            data << i
-            #end
-        end
-        data
+      value = row[column].to_f
+      if options[:multiplier].present?
+        value *= options[:multiplier]
+      end
+
+      i = Indicator.new(start_date: start_date, original_value: value)
+      i.country = country
+      data << i
+      # end
     end
+    data
+  end
 end
-

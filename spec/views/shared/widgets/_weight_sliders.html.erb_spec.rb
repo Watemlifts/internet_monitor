@@ -1,27 +1,27 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe ( 'shared/widgets/_weight_sliders' ) {
+describe("shared/widgets/_weight_sliders") {
   subject { rendered }
 
-  context ( 'normal indicator' ) {
-    let ( :access ) { Category.find_by_slug 'access' }
-    let ( :groups ) {  DatumSource.where( { category_id: access.id } ).map { |ds| ds.group }.uniq }
-    let ( :adoption ) { groups.first }
+  context("normal indicator") {
+    let(:access) { Category.find_by_slug "access" }
+    let(:groups) { DatumSource.where({ category_id: access.id }).map { |ds| ds.group }.uniq }
+    let(:adoption) { groups.first }
 
     before {
-      render 'shared/widgets/weight_sliders', groups: groups, background_color: '#ff0000'
+      render "shared/widgets/weight_sliders", groups: groups, background_color: "#ff0000"
     }
 
     it {
-      should have_css 'form#weight-sliders'
+      should have_css "form#weight-sliders"
     }
 
     it {
-      should have_css 'ul.weight-sliders-list'
+      should have_css "ul.weight-sliders-list"
     }
 
     it {
-      should have_css 'label', text: adoption.public_name
+      should have_css "label", text: adoption.public_name
       should have_css "label[for='range-#{adoption.admin_name}']"
     }
 
@@ -34,15 +34,15 @@ describe ( 'shared/widgets/_weight_sliders' ) {
     }
 
     it {
-      should_not have_css 'input[data-source-id]'
+      should_not have_css "input[data-source-id]"
     }
 
     it {
-      should have_css 'input[data-source-ids]'
+      should have_css "input[data-source-ids]"
     }
 
     it {
-      should have_css 'input[data-default-weight]'
+      should have_css "input[data-default-weight]"
     }
 
     it {
@@ -58,7 +58,7 @@ describe ( 'shared/widgets/_weight_sliders' ) {
       should have_css "input[data-background-min][data-background-max]"
     }
 
-    it { 
+    it {
       should have_css 'button[type="reset"]'
     }
   }

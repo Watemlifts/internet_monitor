@@ -1,6 +1,5 @@
 # This migration comes from seo_meta_engine (originally 20110329222114)
 class CreateSeoMeta < ActiveRecord::Migration
-
   def self.up
     create_table :seo_meta do |t|
       t.integer :seo_meta_id
@@ -20,5 +19,4 @@ class CreateSeoMeta < ActiveRecord::Migration
   def self.down
     drop_table :seo_meta
   end
-
 end

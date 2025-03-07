@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
+
   rescue_from ActionController::RoutingError, with: :render_not_found
 
   def not_found
-    raise ActionController::RoutingError.new( 'Not Found' )
+    raise ActionController::RoutingError.new("Not Found")
   end
 
   protected

@@ -12,4 +12,3 @@ class AddPrimaryKeyToCategorizations < ActiveRecord::Migration
     end
   end
 end
-

@@ -4,4 +4,3 @@ class AddCustomTeaserFieldToBlogPosts < ActiveRecord::Migration
     add_column Refinery::Blog::Post.table_name, :custom_teaser, :text
   end
 end
-

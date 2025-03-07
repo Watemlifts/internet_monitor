@@ -9,22 +9,21 @@ class V1::CountriesController < ApplicationController
     render json: {
       data: @countries.map { |c|
         json = c.as_jsonapi
-        json[ :links ][ :self ] = v1_country_url( c )
+        json[:links][ :self ] = v1_country_url(c)
 
         json
       },
-      included: indicators.map( &:as_jsonapi )
+      included: indicators.map(&:as_jsonapi)
     }
   end
 
   def show
     @country = Country.with_enough_data.find(params[:id])
     json = @country.as_jsonapi
-    json[ :links ][ :self ] = v1_country_url( @country )
+    json[:links][ :self ] = v1_country_url(@country)
     render json: {
       data: json,
-      included: @country.indicators.in_current_index.map( &:as_jsonapi )
+      included: @country.indicators.in_current_index.map(&:as_jsonapi)
     }
   end
-
 end

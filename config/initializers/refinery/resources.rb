@@ -1,4 +1,3 @@
-# encoding: utf-8
 Refinery::Resources.configure do |config|
   # Configures the maximum allowed upload size (in bytes) for a file upload
   # config.max_file_size = 52428800
@@ -23,5 +22,4 @@ Refinery::Resources.configure do |config|
   # config.dragonfly_secret = "076a88c5de616d6ec1a306af1b6c0275f59b08f76b14c3aa"
   # config.dragonfly_url_format = "/system/resources/:job/:basename.:format"
   # config.datastore_root_path = "K:/internet_monitor/public/system/refinery/resources"
-
 end

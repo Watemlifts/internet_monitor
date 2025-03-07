@@ -1,13 +1,13 @@
 class Indicator < Datum
-  delegate :min, :max, :to => :source
+  delegate :min, :max, to: :source
   alias_attribute :percent, :value
 
-  def self.weighted_score( indis )
+  def self.weighted_score(indis)
     # calculate the score for a group of indicators
     # called by each country with the most recent indicators affecting score
 
     # reject all empty indicators
-    indis.reject!{|i| i.percent.nil? || i.percent.nan?}
+    indis.reject! { |i| i.percent.nil? || i.percent.nan? }
 
     # run through all the indicators and produce a sum
     sum = indis.reduce(0.0) do |sum, i|
@@ -35,8 +35,8 @@ class Indicator < Datum
   def calc_percent
     if source.normalized != true
       self.percent = 1.0
-      unless (max-min) == 0
-        percent = (original_value-min) / (max-min)
+      unless (max - min) == 0
+        percent = (original_value - min) / (max - min)
         percent = 1 - percent if source.default_weight < 0
         self.percent = percent
       end
@@ -45,19 +45,19 @@ class Indicator < Datum
 
   def as_jsonapi_v2
     {
-      type: 'data_points',
+      type: "data_points",
       id: id.to_s,
       attributes: {
         indicator: source.admin_name,
         date: start_date.to_date.to_s,
-        value: original_value,
+        value: original_value
       }
     }
   end
 
   def as_jsonapi
     {
-      type: 'indicators',
+      type: "indicators",
       id: id.to_s,
       attributes: {
         start_date: start_date.to_date.to_s,
@@ -67,12 +67,11 @@ class Indicator < Datum
       relationships: {
         datum_source: {
           data: {
-            type: 'datum_sources',
+            type: "datum_sources",
             id: source.id.to_s
           }
         }
       }
     }
-        
   end
 end
