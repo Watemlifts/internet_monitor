@@ -1,58 +1,56 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe ( 'countries.json requests' ) {
-  describe ( 'get /countries.json' ) {
+describe("countries.json requests") {
+  describe("get /countries.json") {
     before {
-      visit countries_path( :format => :json )
-      
+      visit countries_path(format: :json)
     }
 
     it {
-      page.status_code.should eq( 200 )
+      page.status_code.should eq(200)
     }
 
-    describe ( 'json' ) {
-      let ( :parsed ) { JSON.parse( page.source ) }
+    describe("json") {
+      let(:parsed) { JSON.parse(page.source) }
 
       it {
-        parsed.class.should eq( Hash )
-        parsed[ 'cs' ].should_not eq( nil ) # countries
+        parsed.class.should eq(Hash)
+        parsed["cs"].should_not eq(nil) # countries
       }
 
-      describe ( 'countries hash' ) {
-        let ( :countries ) { parsed[ 'cs' ] }
+      describe("countries hash") {
+        let(:countries) { parsed["cs"] }
 
-        describe ( 'country hash' ) {
-          let ( :country ) { countries[ 0 ][ 'c' ] }
+        describe("country hash") {
+          let(:country) { countries[0]["c"] }
 
           it {
-            country[ 'id' ].should_not eq( nil )
-            country[ 'n' ].should eq( nil ) # name (no longer used)
-            country[ 's' ].should_not eq( nil ) # score
+            country["id"].should_not eq(nil)
+            country["n"].should eq(nil) # name (no longer used)
+            country["s"].should_not eq(nil) # score
           }
 
           it {
-            country[ 'data' ].should_not eq( nil ) # indicators
-            country[ 'data' ].class.should eq( Array )
+            country["data"].should_not eq(nil) # indicators
+            country["data"].class.should eq(Array)
           }
 
-          describe ( 'indicator hash' ) {
-            let ( :indicator ) { country[ 'data' ][ 0 ] }
+          describe("indicator hash") {
+            let(:indicator) { country["data"][0] }
 
             it {
-              indicator[ 'v' ].should_not eq( nil ) # value
-              indicator[ 'nv' ].should_not eq( nil ) # normalized_value
-              indicator[ 'sid' ].should_not eq( nil ) # source_id
-              indicator[ 'dw' ].should_not eq( nil ) # default_weight
-              indicator[ 'c' ].should eq( nil ) # category (no longer used)
+              indicator["v"].should_not eq(nil) # value
+              indicator["nv"].should_not eq(nil) # normalized_value
+              indicator["sid"].should_not eq(nil) # source_id
+              indicator["dw"].should_not eq(nil) # default_weight
+              indicator["c"].should eq(nil) # category (no longer used)
 
-              indicator[ 'g' ].should_not eq( nil ) # group
-              indicator[ 'g' ].class.should eq( Fixnum )
+              indicator["g"].should_not eq(nil) # group
+              indicator["g"].class.should eq(Integer)
             }
           }
         }
       }
     }
   }
-
 }

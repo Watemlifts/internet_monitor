@@ -4,7 +4,7 @@ class V2::CountriesController < ApplicationController
     render json: {
       data: @countries.map { |c|
         json = c.as_jsonapi_v2
-        json[ :links ][ :self ] = v2_country_url( c )
+        json[:links][ :self ] = v2_country_url(c)
 
         json
       }
@@ -14,10 +14,9 @@ class V2::CountriesController < ApplicationController
   def show
     @country = Country.find(params[:id])
     json = @country.as_jsonapi_v2
-    json[ :links ][ :self ] = v2_country_url( @country )
+    json[:links][ :self ] = v2_country_url(@country)
     render json: {
       data: json
     }
   end
-
 end

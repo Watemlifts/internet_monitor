@@ -5,12 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-require 'csv'
-require 'roo'
+require "csv"
+require "roo"
 
 # Create countries and connect to languages
-CSV.open(Rails.root.join('db', 'countryInfo.txt'), {:headers => true, :col_sep => "\t"}).each do |line|
-  country = Country.create iso_code: line['ISO'], name: line['Country'], iso3_code: line['ISO3']
+CSV.open(Rails.root.join("db", "countryInfo.txt"), { headers: true, col_sep: "\t" }).each do |line|
+  country = Country.create iso_code: line["ISO"], name: line["Country"], iso3_code: line["ISO3"]
 end
 
 # Added by Refinery CMS Pages extension

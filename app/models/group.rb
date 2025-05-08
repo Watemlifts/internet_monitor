@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
 
   def as_jsonapi
     {
-      type: 'groups',
+      type: "groups",
       id: id.to_s,
       attrributes: {
         admin_name: admin_name,

@@ -1,5 +1,5 @@
 class GooglePriceParser
-  require 'csv'
+  require "csv"
 
   def data(options = {})
     years = options[:years]
@@ -8,16 +8,16 @@ class GooglePriceParser
     normalized_column = options[:normalized_column]
     multiplier = options[:multiplier] || 1.0
     data = []
-    csv = CSV.open(filename, { :headers => true })
+    csv = CSV.open(filename, { headers: true })
     csv.each do |row|
-      country = Country.find_by_iso3_code(row['Code'])
+      country = Country.find_by_iso3_code(row["Code"])
       next unless country
 
       start_date = Date.new(years.to_i, 1, 1)
       datum = row[column].to_f * multiplier unless row[column].nil?
       normalized = row[normalized_column].to_f unless row[normalized_column].nil?
       unless datum.nil?
-        i = Indicator.new( :start_date => start_date, :original_value => datum, :value => (1 - normalized) )
+        i = Indicator.new(start_date: start_date, original_value: datum, value: (1 - normalized))
         i.country = country
         data << i
       end
@@ -25,4 +25,3 @@ class GooglePriceParser
     data
   end
 end
-

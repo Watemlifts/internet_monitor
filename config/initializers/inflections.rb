@@ -15,5 +15,5 @@
 # end
 
 ActiveSupport::Inflector.inflections do |inflect|
-  inflect.irregular 'datum', 'data'
+  inflect.irregular "datum", "data"
 end

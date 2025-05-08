@@ -1,6 +1,6 @@
-require File.expand_path('../boot', __FILE__)
+require File.expand_path("../boot", __FILE__)
 
-require 'rails/all'
+require "rails/all"
 
 if defined?(Bundler)
   Bundler.require(*Rails.groups)
@@ -14,7 +14,7 @@ module Imon
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
-    config.autoload_paths += %W(#{Rails.root.join('lib', 'retrievers')})
+    config.autoload_paths += %W[#{Rails.root.join("lib", "retrievers")}]
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -49,7 +49,7 @@ module Imon
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
+    config.assets.version = "1.0"
 
     # Required (in production) for Refinery to compile assets on `rake assets:precompile`
     config.assets.initialize_on_precompile = true

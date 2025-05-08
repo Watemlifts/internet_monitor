@@ -1,10 +1,10 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe ( 'Group model' ) {
+describe("Group model") {
   subject { group }
 
-  describe ( 'with valid data' ) {
-    let ( :group ) { Group.find_by_admin_name 'adoption' }
+  describe("with valid data") {
+    let(:group) { Group.find_by_admin_name "adoption" }
 
     it {
       should be_valid
@@ -24,11 +24,11 @@ describe ( 'Group model' ) {
     }
 
     it {
-      group.public_name.should eq( 'Adoption' )
+      group.public_name.should eq("Adoption")
     }
 
     it {
-      group.default_weight.should eq( 1.0 )
+      group.default_weight.should eq(1.0)
     }
   }
 }

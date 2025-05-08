@@ -1,12 +1,11 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe "providers/show" do
   before(:each) do
     @provider = assign(:provider, stub_model(Provider,
-      :name => "Name",
-      :short_name => "Short Name",
-      :url => "Url"
-    ))
+                                             name: "Name",
+                                             short_name: "Short Name",
+                                             url: "Url"))
   end
 
   it "renders attributes in <p>" do

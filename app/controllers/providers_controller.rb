@@ -44,7 +44,7 @@ class ProvidersController < ApplicationController
 
     respond_to do |format|
       if @provider.save
-        format.html { redirect_to @provider, notice: 'Provider was successfully created.' }
+        format.html { redirect_to @provider, notice: "Provider was successfully created." }
         format.json { render json: @provider, status: :created, location: @provider }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class ProvidersController < ApplicationController
 
     respond_to do |format|
       if @provider.update_attributes(params[:provider])
-        format.html { redirect_to @provider, notice: 'Provider was successfully updated.' }
+        format.html { redirect_to @provider, notice: "Provider was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

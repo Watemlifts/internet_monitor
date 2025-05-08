@@ -1,12 +1,11 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe "providers/edit" do
   before(:each) do
     @provider = assign(:provider, stub_model(Provider,
-      :name => "MyString",
-      :short_name => "MyString",
-      :url => "MyString"
-    ))
+                                             name: "MyString",
+                                             short_name: "MyString",
+                                             url: "MyString"))
   end
 
   it "renders the edit provider form" do
